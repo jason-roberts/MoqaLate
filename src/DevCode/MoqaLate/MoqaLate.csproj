@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{847A1309-35C5-4BE4-989E-1FA303217000}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoqaLate</RootNamespace>
+    <AssemblyName>MoqaLate</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeModel\ClassSpecification.cs" />
+    <Compile Include="InterfaceTextParsing\CSharpSymbol.cs" />
+    <Compile Include="InterfaceTextParsing\InterfaceDefinitionLineType.cs" />
+    <Compile Include="InterfaceTextParsing\TypeOfLineIdentifier.cs" />
+    <Compile Include="IO\CodeFileSearcher.cs" />
+    <Compile Include="Common\ConsoleLogger.cs" />
+    <Compile Include="Engine.cs" />
+    <Compile Include="CodeModel\Event.cs" />
+    <Compile Include="IO\FileContentLoader.cs" />
+    <Compile Include="IO\FileWriter.cs" />
+    <Compile Include="MockClassBuilding\IClassTextBuilder.cs" />
+    <Compile Include="IO\ICodeFileSearcher.cs" />
+    <Compile Include="IO\IFileContentLoader.cs" />
+    <Compile Include="IO\IFileWriter.cs" />
+    <Compile Include="IO\IgnoredFilesProvider.cs" />
+    <Compile Include="IO\IIgnoredFilesProvider.cs" />
+    <Compile Include="InterfaceTextParsing\IInterfaceLineTextParser.cs" />
+    <Compile Include="Common\ILogger.cs" />
+    <Compile Include="Infastructure\DefaultNinjectModule.cs" />
+    <Compile Include="InterfaceTextParsing\CommentLineRemover.cs" />
+    <Compile Include="InterfaceTextParsing\InterfaceLineTextLineTextParser.cs" />
+    <Compile Include="MockClassBuilding\ClassTextBuilder.cs" />
+    <Compile Include="CodeModel\Method.cs" />
+    <Compile Include="CodeModel\MethodParameter.cs" />
+    <Compile Include="CodeModel\MethodParameterList.cs" />
+    <Compile Include="InterfaceTextParsing\MethodParameterParser.cs" />
+    <Compile Include="InterfaceTextParsing\ParseException.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CodeModel\Property.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="CodeModel\PropertyAccessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)MoqaLate.exe $(SolutionDir)MoqaLateCommandLineExe\
+copy $(TargetDir)ninject.dll $(SolutionDir)MoqaLateCommandLineExe\
+
+rem copy $(TargetDir)MoqaLate.exe $(SolutionDir)..\ExampleSolution\MoqaLateCommandLineExe\
+rem copy $(TargetDir)ninject.dll $(SolutionDir)..\ExampleSolution\MoqaLateCommandLineExe\
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
